@@ -17,7 +17,7 @@ class SliderPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget> [
-          Image.asset(image, width: wight,),
+          Image.asset(image, width: wight),
         ],
       ),
     );
