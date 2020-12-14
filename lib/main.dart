@@ -41,7 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   ];
 
-
   _buildFilterNavigationMenu() {
     return Container(
       child: Column(
@@ -157,22 +156,18 @@ class _MyHomePageState extends State<MyHomePage> {
         NotificationListener<DraggableScrollableNotification>(
           // ignore: missing_return
           onNotification: (notification) {
-            print("${notification.extent}");
             if (notification.extent == 1.0) {
-              setState(() {
-                visible = false;
-              });
+              visible = false;
             } else {
-              setState(() {
-                visible = true;
-              });
+              visible = true;
             }
           },
           child: DraggableScrollableSheet(
               minChildSize: 0.7,
               initialChildSize: 0.7,
               maxChildSize: 1.0,
-              builder: (BuildContext context, ScrollController scrollController) {
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
                 return Container(
                   child: ListView.builder(
                       itemCount: 1,
