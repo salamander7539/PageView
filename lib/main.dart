@@ -1,40 +1,58 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_view/pages.dart';
+import 'package:page_view/preload.dart';
 import 'package:page_view/slider.dart';
 
 void main() => runApp(MyApp());
 
 Color mainColor = Color(0xFFB8B8B8);
+Image myImage;
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PageView',
-      home: MyHomePage(title: 'PageView'),
+      home: Preload(),
     );
   }
 }
 
 final items = List<String>.generate(5, (i) => "Item ${i + 1}");
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class RestaurantPage extends StatefulWidget {
+  RestaurantPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _RestaurantPageState createState() => _RestaurantPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _RestaurantPageState extends State<RestaurantPage> {
   int _currentPage = 0;
   bool visible;
   int chosenItem = 0;
   double height;
+  Image myImage;
 
   final List<Widget> pageNumber = [
     SliderPage(
@@ -194,34 +212,38 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Container(
             height: MediaQuery.of(context).size.height * 0.65,
-            child: Expanded(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    child: ListView.builder(
-                      itemCount: 5,
-                      itemBuilder: (context, position) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            height: 150,
-                            child: Card(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.65,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, position) {
+                            return Padding(
+                              padding: const EdgeInsets.all(10.0),
                               child: Container(
-                                child: ListTile(
-                                  title: Text('Title', style: TextStyle(fontSize: 30.0),),
-                                  subtitle: Text('Subtitle'),
-                                  trailing: Image.asset(pizza),
+                                height: 150,
+                                child: Card(
+                                  child: Container(
+                                    child: ListTile(
+                                      title: Text('Title', style: TextStyle(fontSize: 30.0),),
+                                      subtitle: Text('Subtitle'),
+                                      trailing: Image.asset(pizza),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -297,7 +319,6 @@ class _MyHomePageState extends State<MyHomePage> {
               visible = false;
             } else {
               visible = true;
-
             }
           },
           child: DraggableScrollableSheet(
